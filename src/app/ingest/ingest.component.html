@@ -1,0 +1,35 @@
+<div class="form">
+  <button type="button" mat-raised-button (click)="datasetInput.click()">
+    Choose Dataset
+  </button>
+  <button type="button" mat-raised-button (click)="imageInput.click()">
+    Choose Image
+  </button>
+  <button type="button" mat-raised-button color="primary" (click)="onSubmit()">
+    Submit
+  </button>
+</div>
+
+<input
+  #datasetInput
+  hidden
+  (change)="onFileChange($event, 'csv')"
+  [disabled]="false"
+  [multiple]="multiple[0]"
+  [accept]="accept[0]"
+  type="file"
+  name="datsetInput"
+  id="datsetInput"
+/>
+
+<input
+  #imageInput
+  hidden
+  (change)="onFileChange($event, 'images')"
+  [disabled]="false"
+  [multiple]="multiple[1]"
+  [accept]="accept[1]"
+  type="file"
+  name="imagesInput"
+  id="imagesInput"
+/>
