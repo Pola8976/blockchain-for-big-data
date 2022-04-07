@@ -9,10 +9,11 @@ import { FileUploadService } from '../file-upload.service';
   styleUrls: ['./ingest.component.scss'],
 })
 export class IngestComponent implements OnInit {
-  multiple: boolean[] = [true, true];
-  accept: string[] = ['.csv', 'image/*'];
+  multiple: boolean[] = [false, true, true];
+  accept: string[] = ['.json', '.csv', 'image/*'];
+  types: string[] = ['key', 'csv', 'images'];
 
-  fileBuffer: File[][] | null[] = [null, null];
+  fileBuffer: File[][] | null[] = [null, null, null];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,26 +24,46 @@ export class IngestComponent implements OnInit {
   ngOnInit(): void {}
 
   onFileChange(fileChangeEvent: any, mode: string): void {
-    let files = fileChangeEvent.target.files;
-    if (mode == 'csv') this.fileBuffer[0] = files;
-    else if (mode == 'images') this.fileBuffer[1] = files;
+    this.fileBuffer[this.types.indexOf(mode)] = fileChangeEvent.target.files;
+
+    // let files = fileChangeEvent.target.files;
+
+    // if (mode == 'key') this.fileBuffer[0] = files;
+    // else if (mode == 'csv') this.fileBuffer[1] = files;
+    // else if (mode == 'images') this.fileBuffer[2] = files;
 
     // this.fileUploadService.uploadFile(files, mode).subscribe((data) => {});
   }
 
   onSubmit(): void {
-    if (this.fileBuffer[0]) {
-      this.fileUploadService
-        .uploadFile(this.fileBuffer[0], 'csv')
-        .subscribe((data) => {});
-      this.fileBuffer[0] = null;
+    for (let i = 0; i < this.types.length; i++) {
+      if (this.fileBuffer[i]) {
+        this.fileUploadService
+          .uploadFile(this.fileBuffer[i]!, this.types[i])
+          .subscribe((data) => {});
+        this.fileBuffer[i] = null;
+      }
     }
 
-    if (this.fileBuffer[1]) {
-      this.fileUploadService
-        .uploadFile(this.fileBuffer[1], 'images')
-        .subscribe((data) => {});
-      this.fileBuffer[1] = null;
-    }
+    // if (this.fileBuffer[0]) {
+    //   this.fileUploadService
+    //     .uploadFile(this.fileBuffer[0], 'key')
+    //     .subscribe((data) => {});
+    //   this.fileBuffer[0] = null;
+    // }
+
+    // if (this.fileBuffer[1]) {
+    //   this.fileUploadService
+    //     .uploadFile(this.fileBuffer[1], 'csv')
+    //     .subscribe((data) => {});
+    //   this.fileBuffer[1] = null;
+    // }
+
+    // if (this.fileBuffer[1]) {
+    //   this.fileUploadService
+    //     .uploadFile(this.fileBuffer[1], 'images')
+    //     .subscribe((data) => {});
+    //   this.fileBuffer[1] = null;
+    // }
   }
 }

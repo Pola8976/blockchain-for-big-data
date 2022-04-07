@@ -1,4 +1,7 @@
 <div class="form">
+  <button type="button" mat-raised-button (click)="keyInput.click()">
+    Choose Key
+  </button>
   <button type="button" mat-raised-button (click)="datasetInput.click()">
     Choose Dataset
   </button>
@@ -11,12 +14,24 @@
 </div>
 
 <input
+  #keyInput
+  hidden
+  (change)="onFileChange($event, 'key')"
+  [disabled]="false"
+  [multiple]="multiple[0]"
+  [accept]="accept[0]"
+  type="file"
+  name="imagesInput"
+  id="imagesInput"
+/>
+
+<input
   #datasetInput
   hidden
   (change)="onFileChange($event, 'csv')"
   [disabled]="false"
-  [multiple]="multiple[0]"
-  [accept]="accept[0]"
+  [multiple]="multiple[1]"
+  [accept]="accept[1]"
   type="file"
   name="datsetInput"
   id="datsetInput"
@@ -27,8 +42,8 @@
   hidden
   (change)="onFileChange($event, 'images')"
   [disabled]="false"
-  [multiple]="multiple[1]"
-  [accept]="accept[1]"
+  [multiple]="multiple[2]"
+  [accept]="accept[2]"
   type="file"
   name="imagesInput"
   id="imagesInput"
