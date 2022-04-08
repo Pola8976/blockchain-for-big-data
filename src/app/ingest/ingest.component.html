@@ -8,9 +8,32 @@
   <button type="button" mat-raised-button (click)="imageInput.click()">
     Choose Image
   </button>
-  <button type="button" mat-raised-button color="primary" (click)="onSubmit()">
+  <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Patient ID</mat-label>
+      <input type="text" matInput name="pid" formControlName="pid" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Full Name</mat-label>
+      <input type="text" matInput name="fullName" formControlName="fullName" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Gender</mat-label>
+      <input type="text" matInput name="gender" formControlName="gender" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>DOB</mat-label>
+      <input type="text" matInput name="dob" formControlName="dob" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Address</mat-label>
+      <input type="text" matInput name="address" formControlName="address" />
+    </mat-form-field>
+    <button mat-flat-button color="accent" value="submit">Submit</button>
+  </form>
+  <!-- <button type="button" mat-raised-button color="primary" (click)="onSubmit2()">
     Submit
-  </button>
+  </button> -->
 </div>
 
 <input

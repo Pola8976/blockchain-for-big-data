@@ -15,6 +15,14 @@ export class IngestComponent implements OnInit {
 
   fileBuffer: File[][] | null[] = [null, null, null];
 
+  patientForm = this.formBuilder.group({
+    pid: [''],
+    fullName: [''],
+    gender: [''],
+    dob: [''],
+    address: [''],
+  });
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -36,6 +44,13 @@ export class IngestComponent implements OnInit {
   }
 
   onSubmit(): void {
+    const formJson = JSON.stringify(this.patientForm.value);
+    console.log(formJson);
+
+    this.onSubmit2(formJson);
+  }
+
+  onSubmit2(formJson: string): void {
     for (let i = 0; i < this.types.length; i++) {
       if (this.fileBuffer[i]) {
         this.fileUploadService
