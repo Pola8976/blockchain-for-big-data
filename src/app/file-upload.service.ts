@@ -10,15 +10,30 @@ export class FileUploadService {
 
   constructor(private http: HttpClient) {}
 
-  uploadFile(filesToUpload: File[], mode: string): Observable<any> {
-    console.log('hello');
-
-    const endpoint = `http://localhost:3000/api/upload/${mode}`;
+  uploadFile(
+    filesToUpload: File[][],
+    types: string[],
+    formJson: string
+  ): Observable<any> {
+    console.log(filesToUpload);
+    const endpoint = `http://localhost:3000/api/upload`;
     const formData: FormData = new FormData();
-    for (let i = 0; i < filesToUpload.length; i++) {
-      console.log(filesToUpload[i].name);
-      formData.append(`file${i}`, filesToUpload[i], filesToUpload[i].name);
+    for (let i = 0; i < types.length; i++) {
+      if (filesToUpload[i] != []) {
+        for (let j = 0; j < filesToUpload[i].length; j++) {
+          console.log(i, j, filesToUpload[i][j]);
+          formData.append(
+            `file-${types[i]}-${i}${j}`,
+            filesToUpload[i][j],
+            filesToUpload[i][j].name
+          );
+        }
+      }
     }
+    formData.append(`data-patient`, formJson);
+
+    console.log(formData);
+
     return this.http.post(endpoint, formData);
   }
 }

@@ -51,14 +51,18 @@ export class IngestComponent implements OnInit {
   }
 
   onSubmit2(formJson: string): void {
+    let nonNullBuffer: File[][] = [];
     for (let i = 0; i < this.types.length; i++) {
       if (this.fileBuffer[i]) {
-        this.fileUploadService
-          .uploadFile(this.fileBuffer[i]!, this.types[i])
-          .subscribe((data) => {});
+        nonNullBuffer.push(<File[]>this.fileBuffer[i]);
         this.fileBuffer[i] = null;
+      } else {
+        nonNullBuffer.push([]);
       }
     }
+    this.fileUploadService
+      .uploadFile(nonNullBuffer, this.types, formJson)
+      .subscribe((data) => {});
 
     // if (this.fileBuffer[0]) {
     //   this.fileUploadService
