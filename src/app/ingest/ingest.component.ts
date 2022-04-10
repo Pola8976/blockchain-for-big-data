@@ -10,7 +10,7 @@ import { FileUploadService } from '../file-upload.service';
 })
 export class IngestComponent implements OnInit {
   multiple: boolean[] = [false, true, true];
-  accept: string[] = ['.json', '.csv', 'image/*'];
+  accept: string[] = ['.txt', '.csv', 'image/*'];
   types: string[] = ['key', 'csv', 'images'];
 
   fileBuffer: File[][] | null[] = [null, null, null];
@@ -20,7 +20,6 @@ export class IngestComponent implements OnInit {
     fullName: [''],
     gender: [''],
     dob: [''],
-    address: [''],
   });
 
   constructor(
