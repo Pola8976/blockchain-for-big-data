@@ -36,4 +36,9 @@ export class FileUploadService {
 
     return this.http.post(endpoint, formData);
   }
+
+  getChain(): Observable<any> {
+    const endpoint = `http://localhost:3000/api/chain`;
+    return this.http.post(endpoint, '');
+  }
 }
