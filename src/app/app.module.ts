@@ -16,9 +16,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import { BlocksComponent } from './blocks/blocks.component';
 
 @NgModule({
-  declarations: [AppComponent, IngestComponent],
+  declarations: [AppComponent, IngestComponent, BlocksComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
