@@ -1,7 +1,27 @@
 table {
-    width: 100%;
-  }
+  width: 100%;
+}
 
-div{
-    padding: 3%;
+div {
+  padding: 1%;
+}
+
+.col-id {
+  max-width: 50px;
+}
+
+.col-fullName {
+  max-width: 100px;
+}
+
+.col-gender {
+  max-width: 50px;
+}
+
+.col-dob {
+  max-width: 200px;
+}
+
+.col-hash {
+  min-width: 1200px;
 }
