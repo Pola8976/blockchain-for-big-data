@@ -48,45 +48,6 @@ export interface blockChain {
   timestamp: string;
 }
 
-const ELEMENT_DATA: blockChain[] = [
-  {
-    id: '1',
-    fullName: 'Hydrogen',
-    gender: 'm',
-    dob: 'H',
-    hash: '3hudefbhbcjde',
-    imageName: 'image',
-    timestamp: '13.12.0',
-  },
-  {
-    id: '2',
-    fullName: 'Helium',
-    gender: 'm',
-    dob: 'H',
-    hash: '3hudefbhbcjde',
-    imageName: 'image',
-    timestamp: '13.12.0',
-  },
-  {
-    id: '3',
-    fullName: 'Hydrogen',
-    gender: 'nb',
-    dob: 'H',
-    hash: '3hudefbhbcjde',
-    imageName: 'image',
-    timestamp: '13.12.0',
-  },
-  {
-    id: '4',
-    fullName: 'Helium',
-    gender: 'f',
-    dob: 'H',
-    hash: '3hudefbhbcjde',
-    imageName: 'image',
-    timestamp: '13.12.0',
-  },
-];
-
 @Component({
   selector: 'app-blocks',
   templateUrl: './blocks.component.html',
