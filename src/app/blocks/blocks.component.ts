@@ -1,39 +1,3 @@
-// import { Component, OnInit, Inject } from '@angular/core';
-// import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
-// export interface BlockChain {
-//   id: number;
-//   name: string;
-//   gender: string;
-//   dob: string;
-//   hash: string;
-//   imageName: string;
-//   timestamp: string;
-// }
-
-// const ELEMENT_DATA: BlockChain[] = [
-//   {id: 1, name: 'Hydrogen', gender: 'm', dob: 'H', hash: '3hudefbhbcjde',imageName: 'image', timestamp: '13.12.0'},
-//   {id: 2, name: 'Helium', gender: 'm', dob: 'H', hash: '3hudefbhbcjde',imageName: 'image', timestamp: '13.12.0'},
-//   {id: 3, name: 'Hydrogen', gender: 'nb', dob: 'H', hash: '3hudefbhbcjde',imageName: 'image', timestamp: '13.12.0'},
-//   {id: 4, name: 'Helium', gender: 'f', dob: 'H', hash: '3hudefbhbcjde',imageName: 'image', timestamp: '13.12.0'},
-// ];
-
-// @Component({
-//   selector: 'app-blocks',
-//   templateUrl: './blocks.component.html',
-//   styleUrls: ['./blocks.component.scss']
-// })
-// export class BlocksComponent implements OnInit {
-
-//   displayedColumns: string[] = ['id', 'gender','dob','hash','imageName','timestamp'];
-//   dataSource = ELEMENT_DATA;
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
-
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { FileUploadService } from '../file-upload.service';
@@ -62,7 +26,6 @@ export class BlocksComponent implements OnInit {
     'gender',
     'dob',
     'hash',
-    // 'imageName',
     'timestamp',
     'action',
     'prediction',
@@ -126,14 +89,3 @@ export class BlocksComponent implements OnInit {
     });
   }
 }
-
-// export class DialogOverviewExampleDialog {
-//   constructor(
-//     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-//     //@Inject(MAT_DIALOG_DATA) public data: BlockChain,
-//   ) {}
-
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
-// }
