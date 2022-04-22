@@ -34,7 +34,7 @@ export class FileUploadService {
 
     console.log(formData);
 
-    return this.http.post(endpoint, formData);
+    return this.http.post(endpoint, formData, { responseType: 'text' });
   }
 
   getChain(): Observable<any> {
