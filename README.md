@@ -1,6 +1,9 @@
 # blockchain-for-big-data
 
-Using blockchain to verify the large amounts of data needed for ML and DL models
+Using blockchain to verify the large amounts of data needed for ML and DL models.
+
+## Its backend
+This is the project's frontend. Find its brain at https://github.com/Pola8976/backend-for-bbd.
 
 ## Angular stuff
 
