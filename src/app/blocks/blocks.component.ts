@@ -1,7 +1,7 @@
 // import { Component, OnInit, Inject } from '@angular/core';
 // import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
-// export interface blockChain {
+// export interface BlockChain {
 //   id: number;
 //   name: string;
 //   gender: string;
@@ -11,7 +11,7 @@
 //   timestamp: string;
 // }
 
-// const ELEMENT_DATA: blockChain[] = [
+// const ELEMENT_DATA: BlockChain[] = [
 //   {id: 1, name: 'Hydrogen', gender: 'm', dob: 'H', hash: '3hudefbhbcjde',imageName: 'image', timestamp: '13.12.0'},
 //   {id: 2, name: 'Helium', gender: 'm', dob: 'H', hash: '3hudefbhbcjde',imageName: 'image', timestamp: '13.12.0'},
 //   {id: 3, name: 'Hydrogen', gender: 'nb', dob: 'H', hash: '3hudefbhbcjde',imageName: 'image', timestamp: '13.12.0'},
@@ -38,7 +38,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { FileUploadService } from '../file-upload.service';
 
-export interface blockChain {
+export interface BlockChain {
   id: string;
   fullName: string;
   gender: string;
@@ -46,6 +46,8 @@ export interface blockChain {
   hash: string;
   imageName: string;
   timestamp: string;
+  result: string;
+  data: any;
 }
 
 @Component({
@@ -62,14 +64,39 @@ export class BlocksComponent implements OnInit {
     'hash',
     // 'imageName',
     'timestamp',
+    'action',
+    'prediction',
   ];
-  // dataSource = ELEMENT_DATA;
+
   dataSource: MatTableDataSource<any>;
   transactions: any[];
+  sourceData: BlockChain[] = [];
 
   constructor(private fileUploadService: FileUploadService) {
     this.transactions = [];
     this.dataSource = new MatTableDataSource();
+  }
+
+  predictResult(ele: any): void {
+    console.log(ele);
+    this.fileUploadService
+      .uploadImage(JSON.stringify(ele.data))
+      .subscribe((pred) => {
+        console.log('in subs');
+
+        for (let i = 0; i < this.sourceData.length; i++) {
+          if (
+            Object.keys(ele).every(
+              (key) => this.sourceData[i][key as keyof BlockChain] === ele[key]
+            )
+          ) {
+            this.sourceData[i].result = pred;
+            console.log('modified source');
+
+            break;
+          }
+        }
+      });
   }
 
   ngOnInit(): void {
@@ -78,10 +105,10 @@ export class BlocksComponent implements OnInit {
         this.transactions.push(...reply.transactions);
       }
 
-      const sourceData: blockChain[] = [];
+      // const sourceData: BlockChain[] = [];
       for (const tx of this.transactions) {
         console.log(tx);
-        sourceData.push({
+        this.sourceData.push({
           id: tx.patient.pid,
           fullName: tx.patient.fullName,
           gender: tx.patient.gender,
@@ -89,10 +116,12 @@ export class BlocksComponent implements OnInit {
           hash: tx.signature,
           imageName: tx.dataPath,
           timestamp: tx.timestamp,
+          result: '-',
+          data: tx.data,
         });
       }
 
-      this.dataSource = new MatTableDataSource(sourceData);
+      this.dataSource = new MatTableDataSource(this.sourceData);
       console.log(this.dataSource);
     });
   }
@@ -101,7 +130,7 @@ export class BlocksComponent implements OnInit {
 // export class DialogOverviewExampleDialog {
 //   constructor(
 //     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-//     //@Inject(MAT_DIALOG_DATA) public data: blockChain,
+//     //@Inject(MAT_DIALOG_DATA) public data: BlockChain,
 //   ) {}
 
 //   onNoClick(): void {

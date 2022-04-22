@@ -51,8 +51,36 @@
     </ng-container> -->
 
     <ng-container matColumnDef="timestamp">
-      <mat-header-cell *matHeaderCellDef> timestamp </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.timestamp }} </mat-cell>
+      <mat-header-cell class="col-timestamp" *matHeaderCellDef>
+        timestamp
+      </mat-header-cell>
+      <mat-cell class="col-timestamp" *matCellDef="let element">
+        {{ element.timestamp }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell class="col-action" *matHeaderCellDef>
+        Action
+      </mat-header-cell>
+      <mat-cell class="col-action" *matCellDef="let element">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="predictResult(element)"
+        >
+          Predict
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="prediction">
+      <mat-header-cell class="col-prediction" *matHeaderCellDef>
+        Result
+      </mat-header-cell>
+      <mat-cell class="col-prediction" *matCellDef="let element">
+        {{ element.result }}
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

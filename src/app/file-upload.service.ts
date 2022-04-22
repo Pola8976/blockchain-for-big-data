@@ -41,4 +41,12 @@ export class FileUploadService {
     const endpoint = `http://localhost:3000/api/chain`;
     return this.http.post(endpoint, '');
   }
+
+  uploadImage(image: string): Observable<any> {
+    const endpoint = `http://localhost:3000/api/run-model`;
+    const formData: FormData = new FormData();
+    formData.append(`data-image`, image);
+    console.log(formData);
+    return this.http.post(endpoint, formData, { responseType: 'text' });
+  }
 }
